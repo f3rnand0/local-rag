@@ -1,0 +1,45 @@
+** CREATING ENVIRONMENT **
+- Followed this guide: https://hackernoon.com/build-your-own-rag-app-a-step-by-step-guide-to-setup-llm-locally-using-ollama-python-and-chromadb
+  * Issue on pip install --q "unstructured[all-docs]". Guide: https://github.com/grpc/grpc/issues/36142
+    - Removed tensorflow and opentelemetry-proto
+    - Updated to these versions: grpcio-status:1.62.1, protobuf:4.25.3
+
+- Issues when loading PDF file:
+  * brew install poppler
+  * brew install tesseract
+  * NLTK issues:
+    - pip install nltk
+    - Open python shell and run:
+
+import nltk
+import ssl
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+
+** HOW TO RUN **
+- Create ans start virtual env
+python3 -m venv venv
+source venv/bin/activate
+
+- Install requirements
+pip3 install -r requirements.txt
+
+- Run `ollama serve &` if not started yet
+
+- Load PDFs using endpoint
+
+- Ask questions
+
+** QUESTIONS **
+- What run type type is when all portfolios with foreign assets from a Transfer IN need to be sold?
+- In which phase Capital Markets checks limits & different sanity checks? Provide as much detail of the phase as you can
+- In which phase Capital Markets checks limits & different sanity checks? Provide a broad phase name
+- Which run is used for testing purposes?
